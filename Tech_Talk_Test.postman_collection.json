@@ -1,0 +1,58 @@
+{
+	"info": {
+		"_postman_id": "3e4acf21-470d-4122-9c51-6f1e8ead0e24",
+		"name": "Tech_Talk_Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Test_NorthWind_Customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status test\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test('Customer not null', () => {\r",
+							"    pm.expect(pm.response.json().customer.id).to.be.not.null\r",
+							"})\r",
+							"try {\r",
+							"    pm.environment.set('customerId', pm.response.json().customer.id)\r",
+							"} catch(e) { console.error(e) }\r",
+							"\r",
+							"pm.test('Order has property customerId, that equal customer', () => {\r",
+							"    const Order = pm.response.json().orders[0].order\r",
+							"    pm.expect(Order).to.have.property('customerId').that.equal(pm.environment.get(\"customerId\"))\r",
+							"})\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://northwind.netcore.io/customers/ALFKI.json",
+					"protocol": "https",
+					"host": [
+						"northwind",
+						"netcore",
+						"io"
+					],
+					"path": [
+						"customers",
+						"ALFKI.json"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
