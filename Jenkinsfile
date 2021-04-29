@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Run Tests') {
             steps {
-                sh 'newman run Tech_Talk_Test.postman_collection.json'
+                newman run Tech_Talk_Test.postman_collection.json
                 } 
             }
         }
