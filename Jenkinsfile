@@ -7,11 +7,10 @@ pipeline {
     options { 
         buildDiscarder(logRotator(daysToKeepStr: '10', numToKeepStr: '100')) 
     }    
-    }
     stages {
         stage('Run Tests') {
             steps {
-                        sh 'newman run *.postman_collection.json'
+                sh 'newman run Tech_Talk_Test.postman_collection.json'
                 } 
             }
         }
